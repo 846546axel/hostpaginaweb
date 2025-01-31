@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EACONOMY | Trading Cuántico</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+        :root {
+            --neon-cyan: #00f7ff;
+            --cyber-purple: #8a2be2;
+            --quantum-black: #0a0a18;
+            --hologram: linear-gradient(45deg, var(--neon-cyan), var(--cyber-purple));
+            --glass: rgba(255,255,255,0.03);
+            --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        body {
+            background: var(--quantum-black);
+            color: white;
+            line-height: 1.6;
+            overflow-x: hidden;
+            cursor: url('data:image/svg+xml;utf8,<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="6" fill="%2300f7ff" fill-opacity="0.4"/><circle cx="16" cy="16" r="3" fill="%2300f7ff"/></svg>'), auto;
+        }
+
+        /* Partículas de fondo */
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .quantum-nav {
+            position: fixed;
+            width: 100%;
+            padding: 1.5rem 5%;
+            background: rgba(10,10,24,0.98);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0,247,255,0.2);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .quantum-logo {
+            font-size: 2.2rem;
+            background: var(--hologram);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+            transition: var(--transition);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: var(--transition);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--neon-cyan);
+            transition: var(--transition);
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .hero-section {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 5%;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            background: var(--hologram);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(0,247,255,0.3);
+        }
+
+        /* Sección de Planes 3D */
+        .plans-section {
+            padding: 8rem 5%;
+        }
+
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .plan-card {
+            background: var(--glass);
+            border: 1px solid rgba(0,247,255,0.1);
+            border-radius: 20px;
+            padding: 2.5rem;
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+        }
+
+        .plan-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, var(--neon-cyan), transparent);
+            animation: planGlow 8s linear infinite;
+        }
+
+        @keyframes planGlow {
+            0% { transform: rotate(45deg) translateX(-150%); }
+            100% { transform: rotate(45deg) translateX(150%); }
+        }
+
+        .plan-card:hover {
+            transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+            box-shadow: 0 20px 40px rgba(0,247,255,0.2);
+        }
+
+        /* Timeline Historia */
+        .history-section {
+            padding: 8rem 5%;
+            background: linear-gradient(45deg, #0a0a24, #000018);
+        }
+
+        .timeline {
+            display: grid;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .timeline-item {
+            padding: 2rem;
+            background: var(--glass);
+            border: 1px solid rgba(0,247,255,0.1);
+            border-radius: 15px;
+            transition: var(--transition);
+        }
+
+        .timeline-item:hover {
+            transform: translateX(20px);
+        }
+
+        /* Sección Contacto */
+        .contact-section {
+            padding: 8rem 5%;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(0,247,255,0.2);
+            color: white;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .cta-button {
+            position: relative;
+            background: var(--hologram);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: bold;
+            overflow: hidden;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, #fff, transparent);
+            animation: buttonGlow 3s linear infinite;
+            opacity: 0.2;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,247,255,0.3);
+        }
+
+        @keyframes buttonGlow {
+            0% { transform: rotate(0deg) translateX(-50%); }
+            100% { transform: rotate(360deg) translateX(50%); }
+        }
+
+        @media (max-width: 768px) {
+            .plans-grid, .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="particles"></canvas>
+
+    <nav class="quantum-nav">
+        <div class="quantum-logo">EACONOMY</div>
+        <div class="nav-menu">
+            <a href="#planes">Planes</a>
+            <a href="#historia">Historia</a>
+            <a href="#contacto">Contacto</a>
+        </div>
+    </nav>
+
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">Domina los Mercados con Tecnología Cuántica</h1>
+            <p>La plataforma de trading más avanzada del mundo</p>
+        </div>
+    </section>
+
+    <section class="plans-section" id="planes">
+        <div class="plans-grid">
+            <div class="plan-card">
+                <h3><i class="ri-user-line"></i> Básico</h3>
+                <ul>
+                    <li>Acceso inicial</li>
+                    <li>Soporte comunitario</li>
+                    <li>Actualizaciones semanales</li>
+                </ul>
+                <button class="cta-button">$149/mes</button>
+            </div>
+            <div class="plan-card">
+                <h3><i class="ri-line-chart-line"></i> Intermedio</h3>
+                <ul>
+                    <li>Herramientas pro</li>
+                    <li>Señales diarias</li>
+                    <li>Webinars exclusivos</li>
+                </ul>
+                <button class="cta-button">$299/mes</button>
+            </div>
+            <div class="plan-card">
+                <h3><i class="ri-flashlight-line"></i> Completo</h3>
+                <ul>
+                    <li>Acceso total VIP</li>
+                    <li>Mentoría personal</li>
+                    <li>Alertas en tiempo real</li>
+                </ul>
+                <button class="cta-button">$599/mes</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="history-section" id="historia">
+        <div class="timeline">
+            <div class="timeline-item">
+                <h3>2020 - Fundación</h3>
+                <p>Pioneros en educación financiera cuántica</p>
+            </div>
+            <div class="timeline-item">
+                <h3>2023 - Expansión Global</h3>
+                <p>+100,000 usuarios en 50 países</p>
+            </div>
+            <div class="timeline-item">
+                <h3>2025 - Liderazgo Total</h3>
+                <p>Referencia mundial en trading</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section" id="contacto">
+        <div class="contact-grid">
+            <div>
+                <h2>Contacto</h2>
+                <form class="contact-form">
+                    <input type="text" placeholder="Nombre completo">
+                    <input type="email" placeholder="Correo electrónico">
+                    <textarea rows="5" placeholder="Mensaje"></textarea>
+                    <button class="cta-button">Enviar</button>
+                </form>
+            </div>
+            <div>
+                <div class="contact-info">
+                    <p><i class="ri-map-pin-line"></i> Nueva York, EE.UU.</p>
+                    <p><i class="ri-phone-line"></i> +1 (888) 888-8888</p>
+                    <p><i class="ri-mail-line"></i> contacto@eaconomy.pro</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Sistema de partículas
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 1;
+                this.speed = Math.random() * 0.5 + 0.1;
+                this.alpha = Math.random() * 0.5 + 0.1;
+            }
+
+            update() {
+                this.y += this.speed;
+                if (this.y > canvas.height) this.reset();
+            }
+
+            draw() {
+                ctx.fillStyle = `rgba(0, 247, 255, ${this.alpha})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        const particles = Array(200).fill().map(() => new Particle());
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // Efecto 3D para tarjetas
+        document.querySelectorAll('.plan-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                card.style.transform = `
+                    perspective(1000px)
+                    rotateX(${(centerY - y) / 15}deg)
+                    rotateY(${(x - centerX) / 15}deg)
+                    translateZ(20px)
+                `;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+            });
+        });
+    </script>
+</body>
