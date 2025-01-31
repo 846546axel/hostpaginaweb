@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>¡ALERTA DE SISTEMA! - JUAN.exe</title>
+    <style>
+        body {
+            background: #000;
+            color: #ff0000;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            overflow: hidden;
+        }
+        .virus-alert {
+            border: 3px solid #ff0000;
+            padding: 20px;
+            max-width: 600px;
+            margin: 50px auto;
+            animation: parpadeo 0.5s infinite;
+        }
+        @keyframes parpadeo {
+            0% { opacity: 1; }
+            50% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+        .hacker-img {
+            width: 150px;
+            filter: invert(1);
+            margin: 20px;
+        }
+        #progress {
+            width: 0%;
+            height: 20px;
+            background: #ff0000;
+            margin: 20px auto;
+            transition: width 1s;
+        }
+        .mensaje-oculto {
+            color: #333;
+            font-size: 2px;
+        }
+        button {
+            background: #ff0000;
+            color: black;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="virus-alert">
+        <h1>⚠️ ¡VIRUS DETECTADO! ⚠️</h1>
+        <img src="https://source.unsplash.com/random/150x150/?hacker" class="hacker-img" alt="Hacker">
+        <h2>Objeto infectado: JUAN.EXE</h2>
+        <p>Código de error: <strong>404_CEREBRO_NOT_FOUND</strong></p>
+        <div id="progress"></div>
+        <p>Infectando sistema operativo...<br>
+        • Memoria RAM convertida en TikTok<br>
+        • Corteza prefrontal en modo zombie<br>
+        • Sentido del humor actualizado (versión oscura)</p>
+        
+        <button onclick="mostrarMensaje()">Intentar desinfectar</button>
+        <button onclick="autoDestruccion()">Auto-destrucción</button>
+        
+        <div class="mensaje-oculto">
+            NOTA PARA JUAN: Relájate, es una broma. A menos que... nah, es broma. ¿O no? 😈
+        </div>
+    </div>
+
+    <script>
+        // Simular progreso de virus
+        let progreso = 0;
+        const barra = document.getElementById('progress');
+        const intervalo = setInterval(() => {
+            progreso += Math.random() * 5;
+            barra.style.width = progreso + '%';
+            if(progreso >= 100) clearInterval(intervalo);
+        }, 300);
+
+        function mostrarMensaje() {
+            alert('🚨 ¡Demasiado tarde! El virus "JuanTuberculosis.exe" ya se fusionó con tu ADN digital.\n\nSolución recomendada: 2 cervezas y 1 pizza de emergencia.');
+        }
+
+        function autoDestruccion() {
+            document.body.innerHTML = `
+                <h1 style="color: lime">💣 AUTO-DESTRUCCIÓN ACTIVADA 💣</h1>
+                <p>Cuenta regresiva para desintegración:</p>
+                <h2 id="contador">5</h2>
+                <p>(Nota real: Ahora en serio, feliz día y espero que te guste la broma 🎉)</p>
+            `;
+            
+            let cuenta = 5;
+            const contador = document.getElementById('contador');
+            const cuentaRegresiva = setInterval(() => {
+                cuenta--;
+                contador.textContent = cuenta;
+                if(cuenta <= 0) {
+                    clearInterval(cuentaRegresiva);
+                    contador.textContent = "¡BOOM! (Mentira, soy un script inútil)";
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
